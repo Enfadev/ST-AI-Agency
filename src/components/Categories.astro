@@ -1,0 +1,35 @@
+---
+import SectionHeading from './SectionHeading.astro';
+import Icon from './icons/Icon.astro';
+import { categories } from '../data/categories';
+import { vendors } from '../data/vendors';
+import { sections } from '../data/home';
+import { url } from '../utils/url';
+
+const countByCategory = new Map(
+  categories.map((category) => [category.slug, vendors.filter((vendor) => vendor.category === category.slug).length] as const),
+);
+---
+
+<section class="sec on-white" id="categories" aria-labelledby="categories-title">
+  <div class="wrap">
+    <SectionHeading heading={sections.categories} id="categories-title" />
+    <ul class="catgrid">
+      {categories.map((category, i) => {
+        const count = countByCategory.get(category.slug) ?? 0;
+
+        return (
+          <li class="catcard rv" style={`--d:${i * 60}ms`}>
+            <a href={url('/#vendors')}>
+              <span class="catcard__n">{String(i + 1).padStart(2, '0')}</span>
+              <span class="catcard__go" aria-hidden="true"><Icon name="arrow-up-right" /></span>
+              <h3 class="d4">{category.name}</h3>
+              <p>{category.description}</p>
+              <span class="catcard__count">{count} {count === 1 ? 'vendor' : 'vendors'}</span>
+            </a>
+          </li>
+        );
+      })}
+    </ul>
+  </div>
+</section>
