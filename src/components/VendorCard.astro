@@ -1,0 +1,39 @@
+---
+import type { Vendor } from '../data/vendors';
+import { getCategory } from '../data/categories';
+import Icon from './icons/Icon.astro';
+
+interface Props {
+  vendor: Vendor;
+  delay?: number;
+}
+
+const { vendor, delay = 0 } = Astro.props;
+const category = getCategory(vendor.category);
+const initials = vendor.name
+  .replace(/^(PT|CV|UD)\s+/i, '')
+  .split(/\s+/)
+  .slice(0, 2)
+  .map((word) => word[0])
+  .join('');
+---
+
+<article class="wcard vcard rv" style={delay ? `--d:${delay}ms` : undefined}>
+  <div class="wcard__i vcard__i">
+    <span class="vcard__mono" aria-hidden="true">{initials}</span>
+    <span class="wcard__pill">{category.name}</span>
+  </div>
+  <div class="wcard__b">
+    {vendor.verified && <span class="vcard__verified"><Icon name="check-circle" /> Verified</span>}
+    <h3 class="d4">{vendor.name}</h3>
+    <p>{vendor.description}</p>
+    <ul class="vcard__meta">
+      <li><Icon name="pin" />{vendor.city}, {vendor.province}</li>
+      <li><Icon name="bars" />Est. {vendor.established}</li>
+    </ul>
+    <div class="vcard__actions">
+      <a class="arrow" href={vendor.website} target="_blank" rel="noopener noreferrer">Website <Icon name="arrow-up-right" /></a>
+      <a class="vcard__mail" href={`mailto:${vendor.email}`} aria-label={`Email ${vendor.name}`}><Icon name="mail" /></a>
+    </div>
+  </div>
+</article>

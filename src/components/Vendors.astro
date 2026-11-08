@@ -1,0 +1,15 @@
+---
+import SectionHeading from './SectionHeading.astro';
+import VendorCard from './VendorCard.astro';
+import { vendors } from '../data/vendors';
+import { sections } from '../data/home';
+---
+
+<section class="sec on-ink" id="vendors" aria-labelledby="vendors-title">
+  <div class="wrap">
+    <SectionHeading heading={sections.vendors} tone="o4" id="vendors-title" />
+    <div class="work">
+      {vendors.map((vendor, i) => <VendorCard vendor={vendor} delay={i * 60} />)}
+    </div>
+  </div>
+</section>
