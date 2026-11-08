@@ -20,11 +20,11 @@ import { url } from '../utils/url';
       <Button href={siteConfig.cta.href} variant="ow">{siteConfig.cta.label}</Button>
     </div>
     <nav class="nf__links rv" style="--d:250ms" aria-label="Popular sections">
-      <a href={url('/#services')}>Solutions</a>
-      <a href={url('/#pricing')}>Pricing</a>
-      <a href={url('/#work')}>Customers</a>
+      <a href={url('/#vendors')}>Vendors</a>
+      <a href={url('/#categories')}>Categories</a>
+      <a href={url('/#vendor-form')}>Join as a vendor</a>
       <a href={url('/blog')}>Insights</a>
-      <a href={url('/#contact')}>Contact</a>
+      <a href={`mailto:${siteConfig.email}`}>Contact</a>
     </nav>
   </PageHero>
 </BaseLayout>

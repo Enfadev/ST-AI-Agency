@@ -28,12 +28,16 @@ import { phoneDisplay, url } from '../utils/url';
         )}
       </div>
 
-      {footerColumns.map((col) => (
-        <nav class="fcol" aria-labelledby={`f-${col.title.toLowerCase()}`}>
-          <h2 id={`f-${col.title.toLowerCase()}`}>{col.title}</h2>
-          {col.links.map((l) => <a href={url(l.href)}>{l.label}</a>)}
-        </nav>
-      ))}
+      {footerColumns.map((col) => {
+        const id = `f-${col.title.toLowerCase().replace(/\s+/g, '-')}`;
+
+        return (
+          <nav class="fcol" aria-labelledby={id}>
+            <h2 id={id}>{col.title}</h2>
+            {col.links.map((l) => <a href={url(l.href)}>{l.label}</a>)}
+          </nav>
+        );
+      })}
 
       <div class="fcol">
         <h2>Contact</h2>
