@@ -2,43 +2,71 @@ import type { HeroStat, SectionHeading } from '../types';
 
 /** Copy for the homepage hero. Line breaks in the headline are intentional. */
 export const hero = {
-  eyebrow: '14 agents live in production',
+  eyebrow: 'Verified Indonesian industrial suppliers',
   /** Each entry is one line of the headline; `tint` lines use the light-peach accent. */
   headline: [
-    { text: 'AI agents', tint: false },
-    { text: 'that run', tint: false },
-    { text: 'the work,', tint: true },
-    { text: 'not the demo.', tint: true },
+    { text: 'Discover trusted', tint: false },
+    { text: 'B2B industrial', tint: false },
+    { text: 'vendors in', tint: true },
+    { text: 'Indonesia.', tint: true },
   ],
-  lead: 'We build and run the agents that handle your support queue, your invoice runs and your claims desk — and hand back to a human the moment they should.',
-  primaryCta: { label: 'Book a demo', href: '/#contact' },
-  secondaryCta: { label: 'See our work', href: '/#work' },
-  image: '/images/ai-agency-hero.webp',
+  lead: 'Source verified manufacturers, raw material suppliers and logistics partners across the archipelago — with clear capabilities, locations and direct contacts.',
+  search: {
+    label: 'Search the vendor directory',
+    placeholder: 'Search vendors, products or services',
+    allCategories: 'All categories',
+    submitLabel: 'Search',
+    note: 'Preview only — full vendor search is launching soon.',
+  },
+  primaryCta: { label: 'Browse vendors', href: '/#vendors' },
+  secondaryCta: { label: 'Join as a vendor', href: '/#vendor-form' },
+  image: '/images/sector-freight.webp',
   credentials: [
-    { icon: 'clock', label: 'Always on' },
-    { icon: 'shield-check', label: 'Fully audited' },
-    { icon: 'bars', label: 'Measured against your baseline' },
+    { icon: 'shield-check', label: 'Manually verified' },
+    { icon: 'pin', label: 'Nationwide coverage' },
+    { icon: 'clock', label: 'One business day response' },
   ] as const,
 };
 
 /** The four figures pinned to the bottom of the hero. Demo numbers — replace with your own. */
 export const heroStats: HeroStat[] = [
-  { value: '92%', label: 'Tier-1 tickets closed without a human' },
-  { value: '6 weeks', label: 'From first workshop to live traffic' },
-  { value: '4,200 hrs', label: 'Queue work moved off desks each month' },
-  { value: '24/7', label: 'Shared on-call with your operations lead' },
+  { value: '9', label: 'Verified vendor profiles' },
+  { value: '6', label: 'Industry categories' },
+  { value: '1 day', label: 'Typical response time' },
+  { value: '100%', label: 'Manually reviewed applications' },
 ];
 
 export const clients = {
-  label: 'Operating inside',
-  /** Fictional company names used as a word-mark strip. */
-  names: ['Northwind', 'Kestrel Health', 'Meridian', 'Halcyon', 'Orbit Retail', 'Palisade'],
+  label: 'Nationwide coverage',
+  names: ['Jabodetabek', 'Jawa Timur', 'Sumatera', 'Kalimantan', 'Sulawesi', 'Bali & Nusa Tenggara'],
 };
 
 export const sections: Record<
-  'solutions' | 'platform' | 'process' | 'work' | 'sectors' | 'testimonial' | 'team' | 'pricing' | 'insights' | 'faq' | 'contact',
+  | 'categories'
+  | 'vendors'
+  | 'solutions'
+  | 'platform'
+  | 'process'
+  | 'work'
+  | 'sectors'
+  | 'testimonial'
+  | 'team'
+  | 'pricing'
+  | 'insights'
+  | 'faq'
+  | 'contact',
   SectionHeading
 > = {
+  categories: {
+    kicker: 'Browse by industry',
+    title: 'Six categories,<br>one trusted directory.',
+    lead: 'Every category is curated for industrial buyers, with verified capabilities, plant locations and direct commercial contacts.',
+  },
+  vendors: {
+    kicker: 'Featured vendors',
+    title: 'Verified suppliers<br>across Indonesia.',
+    lead: 'A focused list of manufacturers, raw material suppliers and logistics partners reviewed by our vendor desk.',
+  },
   solutions: {
     kicker: 'What we build',
     title: 'Five agents. One operating standard.',
@@ -86,9 +114,9 @@ export const sections: Record<
     lead: 'If yours is not here, ask it in the form below. We answer in writing before any call.',
   },
   contact: {
-    kicker: 'Get in touch',
-    title: 'Bring us one<br>annoying workflow',
-    lead: 'Tell us the task your team dreads on a Monday. Within a week we will tell you whether an agent can hold it, what it would cost, and where it would break.',
+    kicker: 'For vendors',
+    title: 'Join the directory.<br>Reach serious buyers.',
+    lead: 'Tell us about your business. Our vendor desk reviews every application, verifies the company details and publishes approved profiles to procurement teams.',
   },
 };
 
@@ -100,25 +128,18 @@ export const platformImage = {
 
 /** Orange call-to-action band above the footer. */
 export const finalCta = {
-  kicker: 'Two pilot slots open this quarter',
-  title: 'Stop evaluating AI. Start operating it.',
-  lead: 'Ninety minutes with your operations lead and one of our engineers. You leave with a scoped workflow, an honest feasibility call and a number.',
+  kicker: 'For Indonesian industrial suppliers',
+  title: 'Put your business in front of serious buyers.',
+  lead: 'Create a verified vendor profile and receive qualified enquiries from procurement teams across Indonesia.',
 };
 
-export const contactForm = {
-  workflows: [
-    'Customer support queue',
-    'Back office and reconciliation',
-    'Claims or document processing',
-    'Revenue research and enrichment',
-    'Something else entirely',
-  ],
-  submitLabel: 'Send enquiry',
-  note: 'No sales sequence. One reply, written by an engineer.',
+export const vendorForm = {
+  submitLabel: 'Submit vendor application',
+  note: 'Manual review. One reply from our vendor desk within two business days.',
 };
 
 export const newsletter = {
-  title: 'The run log, monthly',
-  description: 'One email a month: what shipped, what broke, and the numbers behind it. No launch announcements.',
+  title: 'Sourcing notes, monthly',
+  description: 'One email a month with new vendors, category updates and practical sourcing notes for Indonesian industry.',
   submitLabel: 'Subscribe',
 };
