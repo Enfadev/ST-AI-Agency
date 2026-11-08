@@ -2,6 +2,7 @@
 import Button from './Button.astro';
 import FrameLines from './FrameLines.astro';
 import Icon from './icons/Icon.astro';
+import { categories } from '../data/categories';
 import { hero, heroStats } from '../data/home';
 import { url } from '../utils/url';
 ---
@@ -33,11 +34,22 @@ import { url } from '../utils/url';
           ))}
         </h1>
         <p class="lead hero__lead rv" style="--d:130ms">{hero.lead}</p>
-        <div class="btns rv" style="--d:190ms">
+        <form class="hero__search rv" style="--d:190ms" role="search" action={url('/#vendors')} method="get" aria-label={hero.search.label}>
+          <label class="sr-only" for="hero-q">{hero.search.placeholder}</label>
+          <input id="hero-q" name="q" type="search" placeholder={hero.search.placeholder} autocomplete="off" />
+          <label class="sr-only" for="hero-category">Industry category</label>
+          <select id="hero-category" name="category">
+            <option value="">{hero.search.allCategories}</option>
+            {categories.map((category) => <option value={category.slug}>{category.name}</option>)}
+          </select>
+          <button class="btn btn--white" type="submit">{hero.search.submitLabel} <Icon name="arrow-right" /></button>
+        </form>
+        <p class="hero__search-note rv" style="--d:220ms">{hero.search.note}</p>
+        <div class="btns rv" style="--d:260ms">
           <Button href={hero.primaryCta.href} variant="white">{hero.primaryCta.label}</Button>
           <Button href={hero.secondaryCta.href} variant="ow">{hero.secondaryCta.label}</Button>
         </div>
-        <ul class="hero__cred rv" style="--d:250ms">
+        <ul class="hero__cred rv" style="--d:320ms">
           {hero.credentials.map((c) => (
             <li><Icon name={c.icon} />{c.label}</li>
           ))}
