@@ -50,10 +50,10 @@ export interface SiteConfig {
   cta: { label: string; shortLabel: string; href: string };
   forms: {
     /**
-     * Form endpoint. Leave empty to keep the forms in "demo mode": nothing is sent and
-     * visitors see a notice instead. See README › Contact form.
+     * Vendor onboarding webhook. Leave empty to keep the form in "demo mode": nothing
+     * is sent and visitors see a notice instead.
      */
-    contactAction: string;
+    vendorAction: string;
     newsletterAction: string;
     /** Adds the attributes Netlify Forms needs to detect the form at build time. */
     netlify: boolean;

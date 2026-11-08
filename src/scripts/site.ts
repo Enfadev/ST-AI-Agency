@@ -146,7 +146,7 @@ document.querySelectorAll<HTMLFormElement>('form.js-form').forEach((form) => {
     e.preventDefault();
     if (status) {
       status.textContent =
-        'Demo mode: this form is not connected yet, so nothing was sent. Connect a form provider in src/config/site.ts.';
+        'Demo mode: this form is not connected yet, so nothing was sent. Configure the n8n webhook in src/config/site.ts.';
     }
   });
 });

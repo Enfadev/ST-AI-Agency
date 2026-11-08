@@ -1,19 +1,21 @@
 ---
 import Icon from './icons/Icon.astro';
 import { siteConfig } from '../config/site';
-import { sections, contactForm } from '../data/home';
+import { categories } from '../data/categories';
+import { sections, vendorForm } from '../data/home';
 import { phoneDisplay } from '../utils/url';
 
 const h = sections.contact;
-const { contactAction, netlify } = siteConfig.forms;
+const { vendorAction, netlify } = siteConfig.forms;
+const webhookReady = /^https?:\/\//.test(vendorAction);
 ---
 
-<section class="sec on-white" id="contact" aria-labelledby="contact-title">
+<section class="sec on-white" id="vendor-form" aria-labelledby="vendor-form-title">
   <div class="wrap">
     <div class="ctc">
       <div>
         <span class="kicker kicker--heat rv">{h.kicker}</span>
-        <h2 class="d2 rv" style="--d:60ms" id="contact-title" set:html={h.title} />
+        <h2 class="d2 rv" style="--d:60ms" id="vendor-form-title" set:html={h.title} />
         <p class="lead muted rv" style="--d:120ms">{h.lead}</p>
 
         <ul class="rv" style="--d:180ms">
@@ -27,7 +29,7 @@ const { contactAction, netlify } = siteConfig.forms;
           </li>
           <li class="ci">
             <span class="ci__i" aria-hidden="true"><Icon name="pin" /></span>
-            <div><b>{siteConfig.location.label}</b><p>{siteConfig.location.lines.map((l, i) => <>{i > 0 && <br />}{l}</>)}</p></div>
+            <div><b>{siteConfig.location.label}</b><p>{siteConfig.location.lines.map((line, i) => <>{i > 0 && <br />}{line}</>)}</p></div>
           </li>
           <li class="ci">
             <span class="ci__i" aria-hidden="true"><Icon name="time" /></span>
@@ -39,34 +41,39 @@ const { contactAction, netlify } = siteConfig.forms;
       <form
         class="form js-form rv"
         style="--d:120ms"
-        action={contactAction || undefined}
+        action={vendorAction}
         method="post"
-        name="contact"
-        aria-labelledby="contact-title"
-        data-demo={contactAction || netlify ? undefined : 'true'}
+        name="vendor-onboarding"
+        aria-labelledby="vendor-form-title"
+        data-demo={webhookReady || netlify ? undefined : 'true'}
         data-netlify={netlify ? 'true' : undefined}
         netlify-honeypot={netlify ? 'company_website' : undefined}
       >
-        {netlify && <input type="hidden" name="form-name" value="contact" />}
+        {netlify && <input type="hidden" name="form-name" value="vendor-onboarding" />}
+        <input type="hidden" name="source" value="vendornesia-directory" />
         <p class="hp" aria-hidden="true">
           <label>Leave this field empty <input type="text" name="company_website" tabindex="-1" autocomplete="off" /></label>
         </p>
         <div class="fg">
-          <div class="f"><label for="fn">Full name</label><input id="fn" name="name" type="text" placeholder="Priya Raghavan" autocomplete="name" required /></div>
-          <div class="f"><label for="fc">Company</label><input id="fc" name="company" type="text" placeholder="Northwind Freight" autocomplete="organization" /></div>
-          <div class="f"><label for="fe">Work email</label><input id="fe" name="email" type="email" placeholder="you@company.com" autocomplete="email" required /></div>
-          <div class="f"><label for="fp">Phone</label><input id="fp" name="phone" type="tel" placeholder="+1 (000) 123-456" autocomplete="tel" /></div>
-          <div class="f f--w"><label for="fw">Which workflow hurts most?</label>
-            <select id="fw" name="workflow">
-              {contactForm.workflows.map((w) => <option>{w}</option>)}
+          <div class="f"><label for="fn">Full name</label><input id="fn" name="name" type="text" placeholder="Budi Santoso" autocomplete="name" required /></div>
+          <div class="f"><label for="fc">Company / vendor name</label><input id="fc" name="company" type="text" placeholder="PT Sinar Kemasan Nusantara" autocomplete="organization" required /></div>
+          <div class="f"><label for="fe">Work email</label><input id="fe" name="email" type="email" placeholder="budi@company.co.id" autocomplete="email" required /></div>
+          <div class="f"><label for="fp">WhatsApp / phone</label><input id="fp" name="phone" type="tel" placeholder="+62 812 3456 7890" autocomplete="tel" required /></div>
+          <div class="f f--w"><label for="fcat">Industry category</label>
+            <select id="fcat" name="category" required>
+              <option value="" disabled selected>Select a category</option>
+              {categories.map((category) => <option value={category.slug}>{category.name}</option>)}
             </select>
           </div>
-          <div class="f f--w"><label for="fm">Tell us about the work</label>
-            <textarea id="fm" name="message" placeholder="How many people touch it today, how many items per week, and what a wrong answer costs you."></textarea>
+          <div class="f"><label for="fcity">City</label><input id="fcity" name="city" type="text" placeholder="Surabaya" autocomplete="address-level2" required /></div>
+          <div class="f"><label for="fprov">Province</label><input id="fprov" name="province" type="text" placeholder="Jawa Timur" autocomplete="address-level1" required /></div>
+          <div class="f f--w"><label for="fweb">Website</label><input id="fweb" name="website" type="url" placeholder="https://company.co.id" autocomplete="url" /></div>
+          <div class="f f--w"><label for="fm">Products & capabilities</label>
+            <textarea id="fm" name="message" placeholder="Main products, production capacity, certifications and the buyers you already serve." required></textarea>
           </div>
         </div>
-        <button class="btn btn--heat" type="submit">{contactForm.submitLabel} <Icon name="arrow-right" /></button>
-        <p class="form__n">{contactForm.note}</p>
+        <button class="btn btn--heat" type="submit">{vendorForm.submitLabel} <Icon name="arrow-right" /></button>
+        <p class="form__n">{vendorForm.note}</p>
         <p class="form__status" role="status" aria-live="polite"></p>
       </form>
     </div>

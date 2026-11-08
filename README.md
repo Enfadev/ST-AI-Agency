@@ -214,31 +214,19 @@ Your content in Markdown…
 
 The frontmatter is validated by the schema in `src/content.config.ts`, so a typo fails the build with a clear message. The homepage Insights section shows the three newest posts automatically.
 
-## Contact form
+## Vendor onboarding form
 
-The contact and newsletter forms are plain HTML forms. While no endpoint is configured they run in **demo mode**: submitting sends nothing and shows a notice saying so. To connect a provider, edit `forms` in `src/config/site.ts`.
-
-**Formspree:**
+The vendor and newsletter forms are plain HTML forms. While no endpoint is configured they run in **demo mode**: submitting sends nothing and shows a notice saying so. To connect the vendor form to n8n, set `vendorAction` in `src/config/site.ts`:
 
 ```ts
-forms: { contactAction: 'https://formspree.io/f/<your-form-id>', newsletterAction: '', netlify: false }
+forms: {
+  vendorAction: 'https://your-n8n-host/webhook/vendor-onboarding',
+  newsletterAction: '',
+  netlify: false,
+}
 ```
 
-**Web3Forms.** Set `contactAction: 'https://api.web3forms.com/submit'`, then add your access key as a hidden field inside the form in `src/components/ContactCTA.astro`:
-
-```html
-<input type="hidden" name="access_key" value="YOUR_PUBLIC_ACCESS_KEY" />
-```
-
-**Netlify Forms:**
-
-```ts
-forms: { contactAction: '', newsletterAction: '', netlify: true }
-```
-
-With `netlify: true` the forms get `data-netlify="true"`, a hidden `form-name` field and a honeypot, and they submit normally. Netlify detects them at deploy time.
-
-**Your own API.** Set `contactAction` to your endpoint URL. The form posts `name`, `company`, `email`, `phone`, `workflow` and `message`.
+The form submits a standard `POST` with `name`, `company`, `email`, `phone`, `category`, `city`, `province`, `website`, `message` and `source`. Reject submissions where the honeypot field `company_website` is filled.
 
 No API keys or credentials are included in the theme.
 
